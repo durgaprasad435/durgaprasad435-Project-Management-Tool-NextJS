@@ -106,7 +106,7 @@ function ModalComponent(props) {
       setExistingDetails(props.ProjectDetails);
       setTasks(props.ProjectDetails.Tasks);
     }
-  });
+  }, [props.ProjectDetails]);
   return (
     <div>
       <Modal isOpen={props.isOpen}>
@@ -180,17 +180,7 @@ function ModalComponent(props) {
                     <>
                       {tasks.map((task, index) => {
                         return (
-                          <Tooltip>
-                            {/* <Tag
-                              className={styles.tagsInput}
-                              colorScheme="primary"
-                              borderColor="brand.disabledButtonText"
-                            >
-                              <TagLabel>{task}</TagLabel>
-                              <TagCloseButton
-                                onClick={() => OnUpdateTags(task, false)}
-                              ></TagCloseButton>
-                            </Tag> */}
+                          <Tooltip key={index}>
                             <InputGroup size="md" className={styles.tagsInput}>
                               <Input
                                 type="text"

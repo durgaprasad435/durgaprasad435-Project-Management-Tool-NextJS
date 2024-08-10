@@ -323,9 +323,9 @@ function Dashboard() {
                                 {item.Tasks.length >= 1 && (
                                   <Box>
                                     <Text color="">Active Tasks :</Text>
-                                    {item.Tasks.map((t) => {
+                                    {item.Tasks.map((t, ind) => {
                                       return (
-                                        <UnorderedList>
+                                        <UnorderedList key={ind}>
                                           <ListItem fontWeight="600">
                                             {t}
                                           </ListItem>
