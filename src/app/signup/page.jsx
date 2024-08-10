@@ -154,7 +154,7 @@ function Signup() {
   };
   return (
     <Box className={styles.cardContainer}>
-      <Card backgroundColor="transparent" boxShadow="3px 3px 5px">
+      <Card backgroundColor="transparent" boxShadow="6px 6px 5px">
         <Stack className={styles.cardBody}>
           <CardBody>
             <FormControl isInvalid={isEmailError}>
