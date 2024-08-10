@@ -33,7 +33,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import utils from "../../utils/utils";
-import RiseLoader from "react-spinners/RiseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { firebase_app } from "../../firebase/config";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
@@ -95,7 +95,6 @@ function Signin() {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          toast(utils.getToastNotification("success", "Login Successful"));
           setuserEmail(user.email);
           setAccesstoken(user.accessToken);
           localStorage.setItem(
@@ -185,7 +184,11 @@ function Signin() {
               >
                 {isLoading ? (
                   <Box>
-                    <RiseLoader loading={isLoading} size={6} color="white" />
+                    <ScaleLoader
+                      loading={isLoading}
+                      height={15}
+                      color="white"
+                    />
                   </Box>
                 ) : (
                   "SIGN IN"

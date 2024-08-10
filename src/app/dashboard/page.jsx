@@ -198,46 +198,46 @@ function Dashboard() {
           </Menu>
         </Box>
       </Box>
-      <Card className={styles.Card}>
-        <Box className={styles.projectsPage}>
-          <Box className={styles.buttons}>
-            <Stack>
-              <InputGroup>
-                <Input
-                  className={styles.searchbar}
-                  placeholder="Search..."
-                  onChange={(e) => handleSearch(e.target.value)}
-                  value={searchItem}
-                />
-                <InputRightElement>
-                  {searchItem != "" ? (
-                    <CloseIcon
-                      cursor="pointer"
-                      color="#7b1cd5"
-                      onClick={() => handleSearch("")}
-                    />
-                  ) : (
-                    <SearchIcon color="#7b1cd5" />
-                  )}
-                </InputRightElement>
-              </InputGroup>
-            </Stack>
-            <Button
-              colorScheme="purple"
-              ml={8}
-              onClick={() => {
-                setAddNew(true);
-              }}
-            >
-              Add Project
-            </Button>
-          </Box>
-          <Box>
-            {isLoading ? (
-              <Box className={styles.loading}>
-                <RiseLoader loading={isLoading} size={12} color="#b218f5" />
-              </Box>
-            ) : (
+      {isLoading ? (
+        <Box className={styles.loading}>
+          <RiseLoader loading={isLoading} size={12} color="#b218f5" />
+        </Box>
+      ) : (
+        <Card className={styles.Card}>
+          <Box className={styles.projectsPage}>
+            <Box className={styles.buttons}>
+              <Stack>
+                <InputGroup>
+                  <Input
+                    className={styles.searchbar}
+                    placeholder="Search..."
+                    onChange={(e) => handleSearch(e.target.value)}
+                    value={searchItem}
+                  />
+                  <InputRightElement>
+                    {searchItem != "" ? (
+                      <CloseIcon
+                        cursor="pointer"
+                        color="#7b1cd5"
+                        onClick={() => handleSearch("")}
+                      />
+                    ) : (
+                      <SearchIcon color="#7b1cd5" />
+                    )}
+                  </InputRightElement>
+                </InputGroup>
+              </Stack>
+              <Button
+                colorScheme="purple"
+                ml={8}
+                onClick={() => {
+                  setAddNew(true);
+                }}
+              >
+                Add Project
+              </Button>
+            </Box>
+            <Box>
               <Box className={styles.projectsContainer}>
                 {FilterAllProjects(allProjects, searchItem).map(
                   (item, index) => {
@@ -326,21 +326,21 @@ function Dashboard() {
                   }
                 )}
               </Box>
-            )}
+            </Box>
+            {isaddNew || isUpdate ? (
+              <ModalComponent
+                isOpen={true}
+                OnModalClose={OnModalClose}
+                isNew={isaddNew}
+                isUpdate={isUpdate}
+                OnSubmit={OnSubmit}
+                ProjectDetails={project}
+                OnUpdateProject={OnUpdateProject}
+              />
+            ) : null}
           </Box>
-          {isaddNew || isUpdate ? (
-            <ModalComponent
-              isOpen={true}
-              OnModalClose={OnModalClose}
-              isNew={isaddNew}
-              isUpdate={isUpdate}
-              OnSubmit={OnSubmit}
-              ProjectDetails={project}
-              OnUpdateProject={OnUpdateProject}
-            />
-          ) : null}
-        </Box>
-      </Card>
+        </Card>
+      )}
     </Box>
   );
 }

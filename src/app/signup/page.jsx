@@ -32,7 +32,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import utils from "../../utils/utils";
-import RiseLoader from "react-spinners/RiseLoader";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import firebase_app from "../../firebase/config";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { useRouter } from "next/navigation";
@@ -137,13 +137,12 @@ function Signup() {
       });
       setIsReEnteredPasswordError(true);
     }
-    if (password === reEnterPassword) {
+    if (password != "" && password === reEnterPassword) {
       setIsLoading(true);
       await createUserWithEmailAndPassword(auth, eMail, password)
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
-          toast(utils.getToastNotification("success", "Login Successful"));
           return router.push("/signin");
           setIsLoading(false);
         })
@@ -252,7 +251,11 @@ function Signup() {
               >
                 {isLoading ? (
                   <Box>
-                    <RiseLoader loading={isLoading} size={6} color="white" />
+                    <ScaleLoader
+                      loading={isLoading}
+                      height={15}
+                      color="white"
+                    />
                   </Box>
                 ) : (
                   "SIGN UP"
