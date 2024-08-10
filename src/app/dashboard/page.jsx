@@ -108,6 +108,7 @@ function Dashboard() {
       const response = await axios.put("api/updateproject", data);
       setAllProjects(response.data.data);
       setIsLoading(false);
+      setProject([]);
     } catch (error) {
       toast(
         utils.getToastNotification("error", "Error while updating project.")
