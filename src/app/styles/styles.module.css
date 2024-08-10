@@ -1,0 +1,118 @@
+.cardContainer {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-image: url(../../assets/backgroundImg.jpg);
+}
+.viewIcon {
+  color: #f6f6f6;
+  cursor: pointer;
+}
+.loginLink {
+  color: #f6f6f6;
+  text-decoration: underline;
+}
+.Card {
+  box-shadow: 10px 10px 10px #ae8ee1;
+  margin: 1em;
+}
+.projectsPage {
+  min-height: 83vh;
+  background-size: cover;
+  background-color: #f6f6f6;
+}
+.registerBtn {
+  background-color: #551ee3;
+  color: #f6f6f6;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 20px 25px;
+}
+.refreshIcon {
+  display: flex;
+  flex-direction: row;
+}
+.searchbar {
+  border: 1px solid rgb(110, 106, 106);
+  min-width: 150px !important;
+}
+.projectHeading {
+  margin-left: 1em;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  position: relative;
+}
+.projectsContainer {
+  margin: 15px 25px;
+  background-color: white;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+.taskIcon {
+  border-radius: 20px;
+  background-color: #805ad5;
+  min-height: 40px;
+  border: 0px;
+  color: #ffffff;
+}
+.vStack {
+  display: grid;
+}
+.tagsInput {
+  border: 1px solid #45444499;
+  display: flex;
+  justify-content: space-between;
+  min-height: 2.5rem;
+  border-radius: 8px;
+}
+.addInput {
+  width: 400px;
+}
+.actionButton {
+  color: #ffffff;
+}
+.statusField {
+  display: flex;
+  flex-direction: row;
+}
+.Homepage {
+  min-height: 100vh;
+  background-size: cover;
+  background-image: url(../../assets/projectManagement.png);
+}
+.headerAndLinks {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 20px;
+  color: #eee9e9e1;
+}
+.headerFields {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 600;
+  font-size: 18px;
+}
+.headerFields :hover {
+  text-decoration: underline;
+}
+.menuList {
+  background-color: #ffffff;
+  border: 0px solid !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: black !important;
+  justify-content: center;
+}
