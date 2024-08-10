@@ -22,6 +22,8 @@
   min-height: 83vh;
   background-size: cover;
   background-color: #f6f6f6;
+  border: 0.7px solid #7b1cd5;
+  border-radius: 6px;
 }
 .registerBtn {
   background-color: #551ee3;
@@ -30,8 +32,7 @@
 .buttons {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: space-between;
   margin: 20px 25px;
 }
 .refreshIcon {
@@ -39,7 +40,7 @@
   flex-direction: row;
 }
 .searchbar {
-  border: 1px solid rgb(110, 106, 106);
+  border: 1px solid #7b1cd5;
   min-width: 150px !important;
 }
 .projectHeading {
@@ -96,7 +97,7 @@
   display: flex;
   justify-content: space-between;
   padding: 15px 20px;
-  color: #eee9e9e1;
+  color: #ffffffe1;
 }
 .headerFields {
   display: flex;

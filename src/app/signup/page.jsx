@@ -32,6 +32,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import utils from "../../utils/utils";
+import RiseLoader from "react-spinners/RiseLoader";
 import firebase_app from "../../firebase/config";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { useRouter } from "next/navigation";
@@ -55,6 +56,7 @@ function Signup() {
   const [showRePassword, setShowRePassword] = useState(false);
   const [isEmailError, setIsEmailError] = useState(false);
   const [details, SetDetails] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const [isPaswordsSame, setIsPaswordsSame] = useState(false);
 
   const handleEMail = (e) => {
@@ -99,16 +101,6 @@ function Signup() {
         };
       });
     }
-    // if (e.target.value.length <= 8) {
-    //   setIsReEnteredPasswordError(true);
-    //   setIsPaswordsSame(false);
-    //   setErrorMessage((prev) => {
-    //     return {
-    //       ...prev,
-    //       ReEnteredPasswordMessage: "Passwords do not match.",
-    //     };
-    //   });
-    // }
   };
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -127,7 +119,7 @@ function Signup() {
       });
       setIsEmailError(true);
     }
-    if (password.length < 8) {
+    if (password.length <= 8) {
       setErrorMessage((prev) => {
         return {
           ...prev,
@@ -140,21 +132,24 @@ function Signup() {
       setErrorMessage((prev) => {
         return {
           ...prev,
-          ReEnteredPasswordMessage: "Re-enter password",
+          ReEnteredPasswordMessage: "Passwords do not match.",
         };
       });
       setIsReEnteredPasswordError(true);
     }
     if (password === reEnterPassword) {
+      setIsLoading(true);
       await createUserWithEmailAndPassword(auth, eMail, password)
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
           toast(utils.getToastNotification("success", "Login Successful"));
           return router.push("/signin");
+          setIsLoading(false);
         })
         .catch((error) => {
-          toast(utils.getToastNotification("error", error.message));
+          toast(utils.getToastNotification("error", "User already exists"));
+          setIsLoading(false);
         });
     }
   };
@@ -255,7 +250,13 @@ function Signup() {
                 colorScheme="#312ab3"
                 onClick={OnSubmit}
               >
-                SIGN UP
+                {isLoading ? (
+                  <Box>
+                    <RiseLoader loading={isLoading} size={6} color="white" />
+                  </Box>
+                ) : (
+                  "SIGN UP"
+                )}
               </Button>
               <Text marginTop="5px" color="white">
                 If you are already registred. Please click on{" "}

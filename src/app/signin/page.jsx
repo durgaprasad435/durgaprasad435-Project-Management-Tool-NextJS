@@ -33,6 +33,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import utils from "../../utils/utils";
+import RiseLoader from "react-spinners/RiseLoader";
 import { firebase_app } from "../../firebase/config";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
@@ -51,6 +52,7 @@ function Signin() {
   const [isPasswordError, setIsPasswordError] = useState(false);
   const [isEmailError, setIsEmailError] = useState(false);
   const [details, SetDetails] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
 
   const handleEMail = (e) => {
@@ -78,7 +80,7 @@ function Signin() {
       });
       setIsEmailError(true);
     }
-    if (password.length < 8) {
+    if (password.length <= 8) {
       setErrorMessage((prev) => {
         return {
           ...prev,
@@ -88,6 +90,7 @@ function Signin() {
       setIsPasswordError(true);
     }
     if (password.length > 8 && email != "") {
+      setIsLoading(true);
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in
@@ -103,6 +106,7 @@ function Signin() {
             })
           );
           return router.push("/dashboard");
+          setIsLoading(false);
         })
         .catch((error) => {
           toast(utils.getToastNotification("error", error.message));
@@ -179,7 +183,13 @@ function Signin() {
                 colorScheme="#312ab3"
                 onClick={OnSubmit}
               >
-                SIGN IN
+                {isLoading ? (
+                  <Box>
+                    <RiseLoader loading={isLoading} size={6} color="white" />
+                  </Box>
+                ) : (
+                  "SIGN IN"
+                )}
               </Button>
               <Text marginTop="5px" color="white">
                 If you are not yet registred ? Please click on{" "}

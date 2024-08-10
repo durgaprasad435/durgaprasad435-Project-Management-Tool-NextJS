@@ -165,11 +165,6 @@ function Dashboard() {
       );
     }
   }
-  const OnRefresh = async () => {
-    setIsLoading(true);
-    await GetAllProjects();
-    setIsLoading(false);
-  };
   const OnLogout = () => {
     localStorage.clear();
     router.push("/");
@@ -205,158 +200,145 @@ function Dashboard() {
       </Box>
       <Card className={styles.Card}>
         <Box className={styles.projectsPage}>
-          <Box mt={4}>
-            <Box>
-              <Box float="left">
-                <Stack ml={6}>
-                  <InputGroup>
-                    <Input
-                      className={styles.searchbar}
-                      placeholder="Search..."
-                      onChange={(e) => handleSearch(e.target.value)}
-                      value={searchItem}
+          <Box className={styles.buttons}>
+            <Stack>
+              <InputGroup>
+                <Input
+                  className={styles.searchbar}
+                  placeholder="Search..."
+                  onChange={(e) => handleSearch(e.target.value)}
+                  value={searchItem}
+                />
+                <InputRightElement>
+                  {searchItem != "" ? (
+                    <CloseIcon
+                      cursor="pointer"
+                      color="#7b1cd5"
+                      onClick={() => handleSearch("")}
                     />
-                    <InputRightElement>
-                      {searchItem != "" ? (
-                        <CloseIcon
-                          cursor="pointer"
-                          onClick={() => handleSearch("")}
-                        />
-                      ) : (
-                        <SearchIcon />
-                      )}
-                    </InputRightElement>
-                  </InputGroup>
-                </Stack>
-              </Box>
-              <Box className={styles.buttons}>
-                <Tooltip label="Refresh">
-                  <RepeatIcon
-                    boxSize={7}
-                    color="#8854d1"
-                    cursor="pointer"
-                    onClick={OnRefresh}
-                  />
-                </Tooltip>
-                <Button
-                  colorScheme="purple"
-                  ml={8}
-                  onClick={() => {
-                    setAddNew(true);
-                  }}
-                >
-                  Add Project
-                </Button>
-              </Box>
-            </Box>
-            <Box>
-              {isLoading ? (
-                <Box className={styles.loading}>
-                  <RiseLoader loading={isLoading} size={12} color="#b218f5" />
-                </Box>
-              ) : (
-                <Box className={styles.projectsContainer}>
-                  {FilterAllProjects(allProjects, searchItem).map(
-                    (item, index) => {
-                      return (
-                        <>
-                          <Accordion allowMultiple key={index}>
-                            <AccordionItem>
-                              <AccordionButton>
-                                <Box flex="1" textAlign="left">
-                                  <FormControl>
-                                    <Box className={styles.statusField}>
-                                      Project Name :
-                                      <Text ml={3} fontWeight="600">
-                                        {item.projectName}{" "}
-                                      </Text>
-                                    </Box>
-
-                                    <Box className={styles.statusField}>
-                                      Status :{" "}
-                                      <Text
-                                        ml={3}
-                                        color={
-                                          item.status === "Active"
-                                            ? "green"
-                                            : "red"
-                                        }
-                                        fontWeight="bold"
-                                      >
-                                        {item.status}
-                                      </Text>
-                                    </Box>
-                                  </FormControl>
-                                </Box>
-                                <Box flex="1" textAlign="right">
-                                  <Tooltip label="Edit">
-                                    <EditIcon
-                                      marginRight="15px"
-                                      onClick={() => {
-                                        OnEdit(item);
-                                      }}
-                                    />
-                                  </Tooltip>
-                                  <FormControl>
-                                    {item.modifiedAt != null ? (
-                                      <FormHelperText>
-                                        Modified At :{" "}
-                                        {utils.formatDate(item.modifiedAt)}
-                                      </FormHelperText>
-                                    ) : (
-                                      <FormHelperText>
-                                        Created At :{" "}
-                                        {utils.formatDate(item.createdAt)}
-                                      </FormHelperText>
-                                    )}
-                                  </FormControl>
-                                </Box>
-                                <AccordionIcon />
-                              </AccordionButton>
-
-                              <AccordionPanel pb={4}>
-                                <Box className={styles.statusField}>
-                                  Description :
-                                  <Text ml={3} fontWeight="600">
-                                    {item.description}{" "}
-                                  </Text>
-                                </Box>
-                                {item.Tasks.length >= 1 && (
-                                  <Box>
-                                    <Text color="">Active Tasks :</Text>
-                                    {item.Tasks.map((t, ind) => {
-                                      return (
-                                        <UnorderedList key={ind}>
-                                          <ListItem fontWeight="600">
-                                            {t}
-                                          </ListItem>
-                                        </UnorderedList>
-                                      );
-                                    })}
-                                  </Box>
-                                )}
-                              </AccordionPanel>
-                            </AccordionItem>
-                          </Accordion>
-                        </>
-                      );
-                    }
+                  ) : (
+                    <SearchIcon color="#7b1cd5" />
                   )}
-                </Box>
-              )}
-            </Box>
-            {isaddNew || isUpdate ? (
-              <ModalComponent
-                isOpen={true}
-                OnModalClose={OnModalClose}
-                isNew={isaddNew}
-                isUpdate={isUpdate}
-                OnSubmit={OnSubmit}
-                ProjectDetails={project}
-                OnUpdateProject={OnUpdateProject}
-              />
-            ) : null}
+                </InputRightElement>
+              </InputGroup>
+            </Stack>
+            <Button
+              colorScheme="purple"
+              ml={8}
+              onClick={() => {
+                setAddNew(true);
+              }}
+            >
+              Add Project
+            </Button>
           </Box>
+          <Box>
+            {isLoading ? (
+              <Box className={styles.loading}>
+                <RiseLoader loading={isLoading} size={12} color="#b218f5" />
+              </Box>
+            ) : (
+              <Box className={styles.projectsContainer}>
+                {FilterAllProjects(allProjects, searchItem).map(
+                  (item, index) => {
+                    return (
+                      <>
+                        <Accordion allowMultiple key={index}>
+                          <AccordionItem>
+                            <AccordionButton>
+                              <Box flex="1" textAlign="left">
+                                <FormControl>
+                                  <Box className={styles.statusField}>
+                                    Project Name :
+                                    <Text ml={3} fontWeight="600">
+                                      {item.projectName}{" "}
+                                    </Text>
+                                  </Box>
+
+                                  <Box className={styles.statusField}>
+                                    Status :{" "}
+                                    <Text
+                                      ml={3}
+                                      color={
+                                        item.status === "Active"
+                                          ? "green"
+                                          : "red"
+                                      }
+                                      fontWeight="bold"
+                                    >
+                                      {item.status}
+                                    </Text>
+                                  </Box>
+                                </FormControl>
+                              </Box>
+                              <Box flex="1" textAlign="right">
+                                <Tooltip label="Edit">
+                                  <EditIcon
+                                    marginRight="15px"
+                                    onClick={() => {
+                                      OnEdit(item);
+                                    }}
+                                  />
+                                </Tooltip>
+                                <FormControl>
+                                  {item.modifiedAt != null ? (
+                                    <FormHelperText>
+                                      Modified At :{" "}
+                                      {utils.formatDate(item.modifiedAt)}
+                                    </FormHelperText>
+                                  ) : (
+                                    <FormHelperText>
+                                      Created At :{" "}
+                                      {utils.formatDate(item.createdAt)}
+                                    </FormHelperText>
+                                  )}
+                                </FormControl>
+                              </Box>
+                              <AccordionIcon />
+                            </AccordionButton>
+
+                            <AccordionPanel pb={4}>
+                              <Box className={styles.statusField}>
+                                Description :
+                                <Text ml={3} fontWeight="600">
+                                  {item.description}{" "}
+                                </Text>
+                              </Box>
+                              {item.Tasks.length >= 1 && (
+                                <Box>
+                                  <Text color="">Active Tasks :</Text>
+                                  {item.Tasks.map((t, ind) => {
+                                    return (
+                                      <UnorderedList key={ind}>
+                                        <ListItem fontWeight="600">
+                                          {t}
+                                        </ListItem>
+                                      </UnorderedList>
+                                    );
+                                  })}
+                                </Box>
+                              )}
+                            </AccordionPanel>
+                          </AccordionItem>
+                        </Accordion>
+                      </>
+                    );
+                  }
+                )}
+              </Box>
+            )}
+          </Box>
+          {isaddNew || isUpdate ? (
+            <ModalComponent
+              isOpen={true}
+              OnModalClose={OnModalClose}
+              isNew={isaddNew}
+              isUpdate={isUpdate}
+              OnSubmit={OnSubmit}
+              ProjectDetails={project}
+              OnUpdateProject={OnUpdateProject}
+            />
+          ) : null}
         </Box>
       </Card>
     </Box>
