@@ -38,10 +38,8 @@ import { AddIcon, CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { Box, Input, Select, useToast } from "@chakra-ui/react";
 import styles from "../styles/styles.module.css";
 import utils from "../../utils/utils";
-import { useAuth } from "../context/authContext";
 
 function ModalComponent(props) {
-  const { userEmail } = useAuth();
   const { isOpen } = useDisclosure();
   var [task, setTask] = useState("");
   var [showAddTag, SetShowAddTag] = useState(false);
