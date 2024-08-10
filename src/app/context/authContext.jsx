@@ -1,6 +1,6 @@
 // context/authContext.js
 "use client";
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useContext } from "react";
 import utils from "../../utils/utils";
 
 const AuthContext = createContext();

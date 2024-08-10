@@ -51,11 +51,9 @@ import {
   MenuDivider,
 } from "@chakra-ui/react";
 import RiseLoader from "react-spinners/RiseLoader";
-import ModalComponent from "../../components/Modal";
+import ModalComponent from "../components/Modal";
 import utils from "../../utils/utils";
-import WithAuth from "../../components/withAuth";
 import styles from "../styles/styles.module.css";
-import withAuth from "../../components/withAuth";
 import { db } from "../../firebase/config";
 import { useRouter } from "next/navigation";
 import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
@@ -76,7 +74,7 @@ function Dashboard() {
   const [project, setProject] = useState([]);
   const toast = useToast();
   const router = useRouter();
-  const { userEmail, accesstoken } = useAuth();
+  const { userEmail, accesstoken, setuserEmail, setAccesstoken } = useAuth();
 
   const handleSearch = (term) => {
     setSearchItem(term);
@@ -165,13 +163,26 @@ function Dashboard() {
       );
     }
   }
+  const GetAuthDetails = () => {
+    var authorizedUser = utils.getAuthDetails();
+    if (authorizedUser != null) {
+      setuserEmail(authorizedUser.userEmail);
+      setAccesstoken(authorizedUser.accesstoken);
+    }
+    return authorizedUser;
+  };
   const OnLogout = () => {
     localStorage.clear();
     router.push("/");
   };
   useEffect(() => {
-    GetAllProjects();
-  });
+    var authDetails = GetAuthDetails();
+    if (authDetails != null) {
+      GetAllProjects();
+    } else {
+      router.push("/signin");
+    }
+  }, []);
   return (
     <Box>
       <Box className={styles.headerAndLinks} bgColor="#8854d1">
@@ -345,4 +356,4 @@ function Dashboard() {
   );
 }
 
-export default withAuth(Dashboard);
+export default Dashboard;
