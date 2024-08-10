@@ -36,8 +36,8 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import { Box, Input, Select, useToast } from "@chakra-ui/react";
-import styles from "../styles/styles.module.css";
-import utils from "../../utils/utils";
+import styles from "../app/styles/styles.module.css";
+import utils from "../utils/utils";
 
 function ModalComponent(props) {
   const { isOpen } = useDisclosure();

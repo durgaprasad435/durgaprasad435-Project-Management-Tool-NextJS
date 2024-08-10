@@ -51,7 +51,7 @@ import {
   MenuDivider,
 } from "@chakra-ui/react";
 import RiseLoader from "react-spinners/RiseLoader";
-import ModalComponent from "../components/Modal";
+import ModalComponent from "../../components/Modal";
 import utils from "../../utils/utils";
 import styles from "../styles/styles.module.css";
 import { db } from "../../firebase/config";
