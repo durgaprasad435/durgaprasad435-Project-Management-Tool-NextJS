@@ -71,7 +71,6 @@ function Signup() {
       setIsPasswordError(false);
     }
   };
-  console.log("first");
   const handelReEnteredPassword = (e) => {
     setReEnterPassword(e.target.value);
     if (e.target.value.length > 8) {
