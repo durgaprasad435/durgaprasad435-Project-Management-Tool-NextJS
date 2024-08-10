@@ -171,7 +171,7 @@ function Dashboard() {
   };
   useEffect(() => {
     GetAllProjects();
-  }, []);
+  });
   return (
     <Box>
       <Box className={styles.headerAndLinks} bgColor="#8854d1">
