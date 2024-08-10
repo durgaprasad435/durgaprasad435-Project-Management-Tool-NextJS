@@ -108,7 +108,8 @@ function Signin() {
           setIsLoading(false);
         })
         .catch((error) => {
-          toast(utils.getToastNotification("error", error.message));
+          toast(utils.getToastNotification("error", "Invalid Password"));
+          setIsLoading(false);
         });
     }
   };
