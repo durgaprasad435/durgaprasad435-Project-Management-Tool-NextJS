@@ -16,7 +16,7 @@ export default function withAuth(Component) {
       if (authDetails == null) {
         return router.push("/signin");
       }
-    }, []);
+    });
     return <Component {...props} />;
   };
 }

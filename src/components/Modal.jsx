@@ -106,7 +106,7 @@ function ModalComponent(props) {
       setExistingDetails(props.ProjectDetails);
       setTasks(props.ProjectDetails.Tasks);
     }
-  }, []);
+  });
   return (
     <div>
       <Modal isOpen={props.isOpen}>

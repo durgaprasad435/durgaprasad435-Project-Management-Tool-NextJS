@@ -159,7 +159,9 @@ function Dashboard() {
       setAllProjects(response.data.data);
       setIsLoading(false);
     } catch (error) {
-      toast(utils.getToastNotification("error", "Error while getting all project."));
+      toast(
+        utils.getToastNotification("error", "Error while getting all project.")
+      );
     }
   }
   const OnRefresh = async () => {
@@ -173,7 +175,7 @@ function Dashboard() {
   };
   useEffect(() => {
     GetAllProjects();
-  }, []);
+  });
   return (
     <Box>
       <Box className={styles.headerAndLinks} bgColor="#8854d1">
