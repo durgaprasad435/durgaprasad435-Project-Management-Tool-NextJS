@@ -32,12 +32,15 @@
 .buttons {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
+  align-items: center;
   margin: 20px 25px;
 }
 .refreshIcon {
   display: flex;
   flex-direction: row;
+  color: #7b1cd5;
+  cursor: pointer;
 }
 .searchbar {
   border: 1px solid #7b1cd5;

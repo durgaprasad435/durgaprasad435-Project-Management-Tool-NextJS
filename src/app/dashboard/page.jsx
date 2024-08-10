@@ -216,8 +216,8 @@ function Dashboard() {
       ) : (
         <Card className={styles.Card}>
           <Box className={styles.projectsPage}>
-            <Box className={styles.buttons}>
-              <Stack>
+            <Box mt={6}>
+              <Stack float="left" ml={6}>
                 <InputGroup>
                   <Input
                     className={styles.searchbar}
@@ -238,6 +238,15 @@ function Dashboard() {
                   </InputRightElement>
                 </InputGroup>
               </Stack>
+            </Box>
+            <Box className={styles.buttons}>
+              <Tooltip label="Refresh">
+                <RepeatIcon
+                  className={styles.refreshIcon}
+                  boxSize={7}
+                  onClick={GetAllProjects}
+                />
+              </Tooltip>
               <Button
                 colorScheme="purple"
                 ml={8}
