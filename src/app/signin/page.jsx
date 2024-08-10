@@ -33,7 +33,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import utils from "../../utils/utils";
-import firebase_app from "../../firebase/config";
+import { firebase_app } from "../../firebase/config";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 function Signin() {
