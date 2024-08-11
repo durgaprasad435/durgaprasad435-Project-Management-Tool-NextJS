@@ -164,29 +164,26 @@ function Dashboard() {
     router.push("/");
   };
   useEffect(() => {
-    var authDetails = GetAuthDetails();
-    if (authDetails != null) {
-      async function GetAllProjects() {
-        try {
-          setIsLoading(true);
-          const response = await axios.get("api/allprojects");
-          setAllProjects(response.data.data);
-          setIsLoading(false);
-        } catch (error) {
-          toast(
-            utils.getToastNotification(
-              "error",
-              "Error while getting all projects."
-            )
-          );
-        }
+    async function GetAllProjects() {
+      try {
+        setIsLoading(true);
+        const response = await axios.get("api/allprojects");
+        setAllProjects(response.data.data);
+        setIsLoading(false);
+        console.log(response.data.data);
+      } catch (error) {
+        toast(
+          utils.getToastNotification(
+            "error",
+            "Error while getting all projects."
+          )
+        );
       }
-      GetAllProjects();
-      console.log("first");
-    } else {
-      router.push("/signin");
     }
-  }, []);
+    GetAllProjects();
+    console.log("first");
+  }, [allProjects]);
+
   return (
     <Box>
       <Box className={styles.headerAndLinks} bgColor="#8854d1">
