@@ -182,7 +182,7 @@ function Dashboard() {
     }
     GetAllProjects();
     console.log("first");
-  }, [allProjects]);
+  }, []);
 
   return (
     <Box>
