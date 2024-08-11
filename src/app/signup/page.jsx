@@ -33,7 +33,7 @@ import {
 } from "@chakra-ui/react";
 import utils from "../../utils/utils";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import firebase_app from "../../firebase/config";
+import { firebase_app } from "../../firebase/config";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { useRouter } from "next/navigation";
 function Signup() {

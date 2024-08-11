@@ -171,6 +171,7 @@ function Dashboard() {
           setIsLoading(true);
           const response = await axios.get("api/allprojects");
           setAllProjects(response.data.data);
+          console.log("response", response.data.data);
           setIsLoading(false);
         } catch (error) {
           toast(
@@ -261,8 +262,8 @@ function Dashboard() {
                 {FilterAllProjects(allProjects, searchItem).map(
                   (item, index) => {
                     return (
-                      <>
-                        <Accordion allowMultiple key={index}>
+                      <Box key={index}>
+                        <Accordion allowMultiple>
                           <AccordionItem>
                             <AccordionButton>
                               <Box flex="1" textAlign="left">
@@ -340,7 +341,7 @@ function Dashboard() {
                             </AccordionPanel>
                           </AccordionItem>
                         </Accordion>
-                      </>
+                      </Box>
                     );
                   }
                 )}
