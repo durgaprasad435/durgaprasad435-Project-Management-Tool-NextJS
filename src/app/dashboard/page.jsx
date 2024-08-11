@@ -159,7 +159,7 @@ function Dashboard() {
       setIsLoading(false);
     } catch (error) {
       toast(
-        utils.getToastNotification("error", "Error while getting all project.")
+        utils.getToastNotification("error", "Error while getting all projects.")
       );
     }
   }
