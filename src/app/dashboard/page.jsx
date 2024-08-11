@@ -182,6 +182,7 @@ function Dashboard() {
         }
       }
       GetAllProjects();
+      console.log("first");
     } else {
       router.push("/signin");
     }
