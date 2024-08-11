@@ -171,7 +171,6 @@ function Dashboard() {
           setIsLoading(true);
           const response = await axios.get("api/allprojects");
           setAllProjects(response.data.data);
-          console.log("response", response.data.data);
           setIsLoading(false);
         } catch (error) {
           toast(
@@ -220,8 +219,8 @@ function Dashboard() {
       ) : (
         <Card className={styles.Card}>
           <Box className={styles.projectsPage}>
-            <Box mt={6}>
-              <Stack float="left" ml={6}>
+            <Box className={styles.buttons}>
+              <Stack>
                 <InputGroup>
                   <Input
                     className={styles.searchbar}
@@ -242,11 +241,6 @@ function Dashboard() {
                   </InputRightElement>
                 </InputGroup>
               </Stack>
-            </Box>
-            <Box className={styles.buttons}>
-              <Tooltip label="Refresh">
-                <RepeatIcon className={styles.refreshIcon} boxSize={7} />
-              </Tooltip>
               <Button
                 colorScheme="purple"
                 ml={8}
