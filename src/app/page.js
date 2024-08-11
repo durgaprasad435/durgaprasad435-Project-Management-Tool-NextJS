@@ -1,6 +1,8 @@
 "use client";
+import React, { useEffect } from "react";
 import { Box, Text } from "@chakra-ui/react";
 import styles from "../app/styles/styles.module.css";
+import Link from "next/link";
 export default function Home() {
   return (
     <Box className={styles.Homepage}>
@@ -9,12 +11,12 @@ export default function Home() {
           Project Handler
         </Text>
         <Box className={styles.headerFields}>
-          <a href="/signup">
+          <Link href="/signup">
             <Text mr={6}>SIGN UP</Text>
-          </a>
-          <a href="/signin">
+          </Link>
+          <Link href="/signin">
             <Text>SIGN IN</Text>
-          </a>
+          </Link>
         </Box>
       </Box>
     </Box>

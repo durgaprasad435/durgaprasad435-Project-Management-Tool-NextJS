@@ -151,18 +151,6 @@ function Dashboard() {
       setIsLoading(false);
     }
   };
-  async function GetAllProjects() {
-    try {
-      setIsLoading(true);
-      const response = await axios.get("api/allprojects");
-      setAllProjects(response.data.data);
-      setIsLoading(false);
-    } catch (error) {
-      toast(
-        utils.getToastNotification("error", "Error while getting all projects.")
-      );
-    }
-  }
   const GetAuthDetails = () => {
     var authorizedUser = utils.getAuthDetails();
     if (authorizedUser != null) {
@@ -178,6 +166,21 @@ function Dashboard() {
   useEffect(() => {
     var authDetails = GetAuthDetails();
     if (authDetails != null) {
+      async function GetAllProjects() {
+        try {
+          setIsLoading(true);
+          const response = await axios.get("api/allprojects");
+          setAllProjects(response.data.data);
+          setIsLoading(false);
+        } catch (error) {
+          toast(
+            utils.getToastNotification(
+              "error",
+              "Error while getting all projects."
+            )
+          );
+        }
+      }
       GetAllProjects();
     } else {
       router.push("/signin");
@@ -241,11 +244,7 @@ function Dashboard() {
             </Box>
             <Box className={styles.buttons}>
               <Tooltip label="Refresh">
-                <RepeatIcon
-                  className={styles.refreshIcon}
-                  boxSize={7}
-                  onClick={GetAllProjects}
-                />
+                <RepeatIcon className={styles.refreshIcon} boxSize={7} />
               </Tooltip>
               <Button
                 colorScheme="purple"
