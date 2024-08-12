@@ -84,12 +84,14 @@ function Dashboard() {
   useEffect(() => {
     async function GetAllProjects() {
       try {
+        setIsLoading(true);
         const projectsRef = await getDocs(collection(db, "projects"));
         var allproj = [];
         projectsRef.forEach((doc) => {
           allproj.push({ id: doc.id, ...doc.data() });
         });
         setAllProjects(allproj);
+        setIsLoading(false);
       } catch (error) {
         toast(
           utils.getToastNotification(
@@ -97,6 +99,7 @@ function Dashboard() {
             "Error while getting all projects."
           )
         );
+        setIsLoading(false);
       }
     }
     GetAllProjects();
