@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
       setuserEmail(authorizedUser.userEmail);
       setAccesstoken(authorizedUser.accesstoken);
     } else {
-      router.push("/signin");
+      router.push("/");
     }
   });
   return (
