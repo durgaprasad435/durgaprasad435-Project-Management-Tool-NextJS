@@ -168,82 +168,26 @@ function Dashboard() {
     localStorage.clear();
     router.push("/");
   };
-  // async function GetAllProjects() {
-  //   try {
-  //     setIsLoading(true);
-  //     const response = await axios.get("api/allprojects");
-  //     setAllProjects(response.data.data);
-  //     setIsLoading(false);
-  //     console.log(response.data.data);
-  //   } catch (error) {
-  //     toast(
-  //       utils.getToastNotification("error", "Error while getting all projects.")
-  //     );
-  //   }
-  // }
-
   useEffect(() => {
     async function GetAllProjects() {
       try {
         const projectsRef = await getDocs(collection(db, "projects"));
-        var allp = [];
+        var allproj = [];
         projectsRef.forEach((doc) => {
-          allp.push({ id: doc.id, ...doc.data() });
+          allproj.push({ id: doc.id, ...doc.data() });
         });
-        setAllProjects(allp);
-        console.log(allp);
+        setAllProjects(allproj);
       } catch (error) {
-        console.log(error);
+        toast(
+          utils.getToastNotification(
+            "error",
+            "Error while getting all projects."
+          )
+        );
       }
     }
     GetAllProjects();
   }, []);
-  // useEffect(() => {
-  //   console.log("first");
-  //   var authDetails = GetAuthDetails();
-  //   if (authDetails != null) {
-  //     async function GetAllProjects() {
-  //       try {
-  //         const projectsRef = await getDocs(collection(db, "projects"));
-  //         var allp = [];
-  //         projectsRef.forEach((doc) => {
-  //           allp.push({ id: doc.id, ...doc.data() });
-  //         });
-  //         setAllProjects(allp);
-  //         console.log(allp);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     }
-  //     GetAllProjects();
-  //   } else {
-  //     router.push("/signin");
-  //   }
-  // }, []);
-  // useEffect(() => {
-  //   var authDetails = GetAuthDetails();
-  //   if (authDetails != null) {
-  //     async function GetAllProjects() {
-  //       try {
-  //         setIsLoading(true);
-  //         const response = await axios.get("api/allprojects");
-  //         setAllProjects(response.data.data);
-  //         setIsLoading(false);
-  //       } catch (error) {
-  //         toast(
-  //           utils.getToastNotification(
-  //             "error",
-  //             "Error while getting all projects."
-  //           )
-  //         );
-  //       }
-  //     }
-
-  //     GetAllProjects();
-  //   } else {
-  //     router.push("/signin");
-  //   }
-  // }, []);
   return (
     <Box>
       <Box className={styles.headerAndLinks} bgColor="#8854d1">
@@ -299,7 +243,6 @@ function Dashboard() {
                   </InputRightElement>
                 </InputGroup>
               </Stack>
-              {/* <RepeatIcon onClick={GetAllProjects} /> */}
               <Button
                 colorScheme="purple"
                 ml={8}
