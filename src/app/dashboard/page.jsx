@@ -168,6 +168,20 @@ function Dashboard() {
     localStorage.clear();
     router.push("/");
   };
+  async function GetAllProjects() {
+    try {
+      setIsLoading(true);
+      const response = await axios.get("api/allprojects");
+      setAllProjects(response.data.data);
+      setIsLoading(false);
+      console.log(response.data.data);
+    } catch (error) {
+      toast(
+        utils.getToastNotification("error", "Error while getting all projects.")
+      );
+    }
+  }
+
   useEffect(() => {
     var authDetails = GetAuthDetails();
     if (authDetails != null) {
@@ -247,6 +261,7 @@ function Dashboard() {
                   </InputRightElement>
                 </InputGroup>
               </Stack>
+              <RepeatIcon onClick={GetAllProjects} />
               <Button
                 colorScheme="purple"
                 ml={8}
