@@ -82,27 +82,31 @@ function Dashboard() {
   const { userEmail, accesstoken, setuserEmail, setAccesstoken } = useAuth();
 
   useEffect(() => {
-    async function GetAllProjects() {
-      try {
-        setIsLoading(true);
-        const projectsRef = await getDocs(collection(db, "projects"));
-        var allproj = [];
-        projectsRef.forEach((doc) => {
-          allproj.push({ id: doc.id, ...doc.data() });
-        });
-        setAllProjects(allproj);
-        setIsLoading(false);
-      } catch (error) {
-        toast(
-          utils.getToastNotification(
-            "error",
-            "Error while getting all projects."
-          )
-        );
-        setIsLoading(false);
+    if (userEmail != null) {
+      async function GetAllProjects() {
+        try {
+          setIsLoading(true);
+          const projectsRef = await getDocs(collection(db, "projects"));
+          var allproj = [];
+          projectsRef.forEach((doc) => {
+            allproj.push({ id: doc.id, ...doc.data() });
+          });
+          setAllProjects(allproj);
+          setIsLoading(false);
+        } catch (error) {
+          toast(
+            utils.getToastNotification(
+              "error",
+              "Error while getting all projects."
+            )
+          );
+          setIsLoading(false);
+        }
       }
+      GetAllProjects();
+    } else {
+      router.push("/");
     }
-    GetAllProjects();
   }, []);
   const handleSearch = (term) => {
     setSearchItem(term);

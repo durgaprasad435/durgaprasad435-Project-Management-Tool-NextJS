@@ -15,8 +15,6 @@ export const AuthProvider = ({ children }) => {
     if (authorizedUser != null) {
       setuserEmail(authorizedUser.userEmail);
       setAccesstoken(authorizedUser.accesstoken);
-    } else {
-      router.push("/");
     }
   });
   return (
