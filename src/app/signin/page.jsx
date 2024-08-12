@@ -95,8 +95,8 @@ function Signin() {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          setuserEmail(user.email);
-          setAccesstoken(user.accessToken);
+          //setuserEmail(user.email);
+          //setAccesstoken(user.accessToken);
           localStorage.setItem(
             "auth",
             JSON.stringify({
