@@ -1,5 +1,10 @@
 "use client";
-import React, { useState, useEffect, CSSProperties } from "react";
+import React, {
+  useState,
+  useEffect,
+  CSSProperties,
+  useLayoutEffect,
+} from "react";
 import axios from "axios";
 import {
   Box,
@@ -74,7 +79,7 @@ function Dashboard() {
   const [project, setProject] = useState([]);
   const toast = useToast();
   const router = useRouter();
-  const { userEmail, accesstoken, setuserEmail, setAccesstoken } = useAuth();
+  //const { userEmail, accesstoken, setuserEmail, setAccesstoken } = useAuth();
 
   const handleSearch = (term) => {
     setSearchItem(term);
@@ -159,6 +164,10 @@ function Dashboard() {
     }
     return authorizedUser;
   };
+  // var authdetails = GetAuthDetails();
+  // if (authdetails == null) {
+  //   router.push("/signin");
+  // }
   const OnLogout = () => {
     localStorage.clear();
     router.push("/");
@@ -180,10 +189,9 @@ function Dashboard() {
         );
       }
     }
-    GetAllProjects();
     console.log("first");
+    GetAllProjects();
   }, []);
-
   return (
     <Box>
       <Box className={styles.headerAndLinks} bgColor="#8854d1">
@@ -192,14 +200,9 @@ function Dashboard() {
         </Text>
         <Box className={styles.headerFields}>
           <Menu>
-            <Tooltip label={userEmail} placement="left-end">
+            <Tooltip placement="left-end">
               <MenuButton>
-                <Avatar
-                  className="profile-photo"
-                  name={userEmail}
-                  bg="red.500"
-                  boxSize="2em"
-                />
+                <Avatar className="profile-photo" bg="red.500" boxSize="2em" />
               </MenuButton>
             </Tooltip>
             <MenuList>

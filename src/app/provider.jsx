@@ -6,9 +6,7 @@ import { AuthProvider } from "../app/context/authContext";
 export function Providers({ children }) {
   return (
     <CacheProvider>
-      <AuthProvider>
-        <ChakraProvider>{children}</ChakraProvider>
-      </AuthProvider>
+      <ChakraProvider>{children}</ChakraProvider>
     </CacheProvider>
   );
 }
