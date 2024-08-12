@@ -41,7 +41,7 @@ function Signin() {
   const auth = getAuth(firebase_app);
   const toast = useToast();
   const router = useRouter();
-  //const { setuserEmail, setAccesstoken } = useAuth();
+  const { setuserEmail, setAccesstoken } = useAuth();
   let errorsObject = {
     EmailMessage: "",
     PasswordMessage: "",
@@ -95,8 +95,8 @@ function Signin() {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          //setuserEmail(user.email);
-          //setAccesstoken(user.accessToken);
+          setuserEmail(user.email);
+          setAccesstoken(user.accessToken);
           localStorage.setItem(
             "auth",
             JSON.stringify({

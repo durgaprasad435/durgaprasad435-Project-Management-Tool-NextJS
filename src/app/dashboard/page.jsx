@@ -79,7 +79,7 @@ function Dashboard() {
   const [project, setProject] = useState([]);
   const toast = useToast();
   const router = useRouter();
-  //const { userEmail, accesstoken, setuserEmail, setAccesstoken } = useAuth();
+  const { userEmail, accesstoken, setuserEmail, setAccesstoken } = useAuth();
 
   const handleSearch = (term) => {
     setSearchItem(term);
@@ -164,33 +164,33 @@ function Dashboard() {
     }
     return authorizedUser;
   };
-  // var authdetails = GetAuthDetails();
-  // if (authdetails == null) {
-  //   router.push("/signin");
-  // }
   const OnLogout = () => {
     localStorage.clear();
     router.push("/");
   };
   useEffect(() => {
-    async function GetAllProjects() {
-      try {
-        setIsLoading(true);
-        const response = await axios.get("api/allprojects");
-        setAllProjects(response.data.data);
-        setIsLoading(false);
-        console.log(response.data.data);
-      } catch (error) {
-        toast(
-          utils.getToastNotification(
-            "error",
-            "Error while getting all projects."
-          )
-        );
+    var authDetails = GetAuthDetails();
+    if (authDetails != null) {
+      async function GetAllProjects() {
+        try {
+          setIsLoading(true);
+          const response = await axios.get("api/allprojects");
+          setAllProjects(response.data.data);
+          setIsLoading(false);
+        } catch (error) {
+          toast(
+            utils.getToastNotification(
+              "error",
+              "Error while getting all projects."
+            )
+          );
+        }
       }
+
+      GetAllProjects();
+    } else {
+      router.push("/signin");
     }
-    console.log("first");
-    GetAllProjects();
   }, []);
   return (
     <Box>
@@ -200,9 +200,14 @@ function Dashboard() {
         </Text>
         <Box className={styles.headerFields}>
           <Menu>
-            <Tooltip placement="left-end">
+            <Tooltip placement="left-end" label={userEmail}>
               <MenuButton>
-                <Avatar className="profile-photo" bg="red.500" boxSize="2em" />
+                <Avatar
+                  className="profile-photo"
+                  bg="red.500"
+                  boxSize="2em"
+                  name={userEmail}
+                />
               </MenuButton>
             </Tooltip>
             <MenuList>
