@@ -176,14 +176,6 @@ function Dashboard() {
       setIsLoading(false);
     }
   };
-  const GetAuthDetails = () => {
-    var authorizedUser = utils.getAuthDetails();
-    if (authorizedUser != null) {
-      setuserEmail(authorizedUser.userEmail);
-      setAccesstoken(authorizedUser.accesstoken);
-    }
-    return authorizedUser;
-  };
   const OnLogout = () => {
     localStorage.clear();
     router.push("/");
