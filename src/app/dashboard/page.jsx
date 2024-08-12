@@ -81,6 +81,20 @@ function Dashboard() {
   const router = useRouter();
   const { userEmail, accesstoken, setuserEmail, setAccesstoken } = useAuth();
 
+  useEffect(() => {
+    GetAllProjects();
+  }, []);
+
+  const GetAllProjects = async () => {
+    try {
+      let response = await axios.get("/api/allprojects");
+      setAllProjects(response?.data?.data);
+    } catch (error) {
+      toast(
+        utils.getToastNotification("error", "Error while getting all projects.")
+      );
+    }
+  };
   const handleSearch = (term) => {
     setSearchItem(term);
   };
@@ -168,26 +182,26 @@ function Dashboard() {
     localStorage.clear();
     router.push("/");
   };
-  useEffect(() => {
-    async function GetAllProjects() {
-      try {
-        const projectsRef = await getDocs(collection(db, "projects"));
-        var allproj = [];
-        projectsRef.forEach((doc) => {
-          allproj.push({ id: doc.id, ...doc.data() });
-        });
-        setAllProjects(allproj);
-      } catch (error) {
-        toast(
-          utils.getToastNotification(
-            "error",
-            "Error while getting all projects."
-          )
-        );
-      }
-    }
-    GetAllProjects();
-  }, []);
+  // useEffect(() => {
+  //   async function GetAllProjects() {
+  //     try {
+  //       const projectsRef = await getDocs(collection(db, "projects"));
+  //       var allproj = [];
+  //       projectsRef.forEach((doc) => {
+  //         allproj.push({ id: doc.id, ...doc.data() });
+  //       });
+  //       setAllProjects(allproj);
+  //     } catch (error) {
+  //       toast(
+  //         utils.getToastNotification(
+  //           "error",
+  //           "Error while getting all projects."
+  //         )
+  //       );
+  //     }
+  //   }
+  //   GetAllProjects();
+  // }, []);
   return (
     <Box>
       <Box className={styles.headerAndLinks} bgColor="#8854d1">
