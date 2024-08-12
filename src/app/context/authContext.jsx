@@ -10,13 +10,6 @@ export const AuthProvider = ({ children }) => {
   const [userEmail, setuserEmail] = useState(null);
   const [accesstoken, setAccesstoken] = useState(null);
   const router = useRouter();
-  useEffect(() => {
-    var authorizedUser = utils.getAuthDetails();
-    if (authorizedUser != null) {
-      setuserEmail(authorizedUser.userEmail);
-      setAccesstoken(authorizedUser.accesstoken);
-    }
-  });
   return (
     <AuthContext.Provider
       value={{ userEmail, setuserEmail, setAccesstoken, accesstoken }}

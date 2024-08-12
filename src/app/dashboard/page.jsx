@@ -82,7 +82,8 @@ function Dashboard() {
   const { userEmail, accesstoken, setuserEmail, setAccesstoken } = useAuth();
 
   useEffect(() => {
-    if (userEmail != null) {
+    var authDetails = GetAuthDetails();
+    if (authDetails != null) {
       async function GetAllProjects() {
         try {
           setIsLoading(true);
@@ -105,9 +106,17 @@ function Dashboard() {
       }
       GetAllProjects();
     } else {
-      router.push("/");
+      router.push("/signin");
     }
   }, []);
+  const GetAuthDetails = () => {
+    var authorizedUser = utils.getAuthDetails();
+    if (authorizedUser != null) {
+      setuserEmail(authorizedUser.userEmail);
+      setAccesstoken(authorizedUser.accesstoken);
+    }
+    return authorizedUser;
+  };
   const handleSearch = (term) => {
     setSearchItem(term);
   };
