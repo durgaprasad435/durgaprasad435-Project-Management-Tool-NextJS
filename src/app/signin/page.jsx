@@ -1,37 +1,25 @@
 "use client";
-import React, { useDebugValue, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../context/authContext";
 import styles from "../styles/styles.module.css";
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
-  Image,
   Stack,
-  Heading,
   Text,
   Button,
   Input,
   Box,
-  Divider,
   Flex,
-  HStack,
-} from "@chakra-ui/react";
-import {
   FormControl,
-  FormLabel,
   FormErrorMessage,
   FormHelperText,
-} from "@chakra-ui/react";
-import { IconButton } from "@chakra-ui/react";
-import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
-import {
   InputGroup,
   InputRightElement,
-  InputLeftElement,
   useToast,
 } from "@chakra-ui/react";
+import { ViewOffIcon, ViewIcon } from "@chakra-ui/icons";
 import utils from "../../utils/utils";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { firebase_app } from "../../firebase/config";
@@ -70,10 +58,6 @@ function Signin() {
   const handleClick = () => setShow(!show);
 
   const OnSubmit = async () => {
-    var userDetails = {
-      EMail: email,
-      Password: password,
-    };
     if (email == "") {
       setErrorMessage((prev) => {
         return { ...prev, EmailMessage: "E-Mail is required" };
@@ -104,8 +88,8 @@ function Signin() {
               accesstoken: user.accessToken,
             })
           );
-          return router.push("/dashboard");
           setIsLoading(false);
+          return router.push("/dashboard");
         })
         .catch((error) => {
           toast(utils.getToastNotification("error", "Invalid Password"));

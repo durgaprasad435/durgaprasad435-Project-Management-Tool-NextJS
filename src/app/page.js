@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { Box, Text } from "@chakra-ui/react";
 import styles from "../app/styles/styles.module.css";
 import Link from "next/link";

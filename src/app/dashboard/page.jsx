@@ -1,75 +1,41 @@
 "use client";
-import React, {
-  useState,
-  useEffect,
-  CSSProperties,
-  useLayoutEffect,
-} from "react";
-import axios from "axios";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   FormControl,
-  FormLabel,
   FormHelperText,
   Button,
-  IconButton,
   Stack,
   InputGroup,
-  InputLeftElement,
   InputRightElement,
   Input,
-  Header,
   Text,
   Tooltip,
-  OrderedList,
   ListItem,
   UnorderedList,
   Card,
-} from "@chakra-ui/react";
-import { EditIcon, RepeatIcon, SearchIcon, CloseIcon } from "@chakra-ui/icons";
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  useDisclosure,
   useToast,
-} from "@chakra-ui/react";
-import {
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-} from "@chakra-ui/react";
-import {
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
+  Avatar,
 } from "@chakra-ui/react";
+import { EditIcon, SearchIcon, CloseIcon } from "@chakra-ui/icons";
 import RiseLoader from "react-spinners/RiseLoader";
 import ModalComponent from "../../components/Modal";
 import utils from "../../utils/utils";
 import styles from "../styles/styles.module.css";
 import { db } from "../../firebase/config";
 import { useRouter } from "next/navigation";
-import { Avatar, AvatarBadge, AvatarGroup } from "@chakra-ui/react";
-import {
-  collection,
-  getDocs,
-  doc,
-  addDoc,
-  updateDoc,
-} from "@firebase/firestore";
+import { collection, getDocs } from "@firebase/firestore";
 import { useAuth } from "../context/authContext";
+import axios from "axios";
 function Dashboard() {
   const [allProjects, setAllProjects] = useState([]);
   const [isaddNew, setAddNew] = useState(false);

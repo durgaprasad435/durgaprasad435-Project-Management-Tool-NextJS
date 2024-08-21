@@ -7,40 +7,26 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
   Button,
-  useDisclosure,
   Textarea,
   VStack,
   Tooltip,
   IconButton,
   Text,
-} from "@chakra-ui/react";
-import {
-  InputGroup,
-  InputRightElement,
-  InputLeftElement,
-} from "@chakra-ui/react";
-import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
   FormHelperText,
+  InputGroup,
+  InputRightElement,
+  Box,
+  Input,
+  Select,
 } from "@chakra-ui/react";
-import {
-  Tag,
-  TagLabel,
-  TagLeftIcon,
-  TagRightIcon,
-  TagCloseButton,
-} from "@chakra-ui/react";
-import { AddIcon, CheckIcon, CloseIcon } from "@chakra-ui/icons";
-import { Box, Input, Select, useToast } from "@chakra-ui/react";
+import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import styles from "../app/styles/styles.module.css";
 import utils from "../utils/utils";
 
 function ModalComponent(props) {
-  const { isOpen } = useDisclosure();
   var [task, setTask] = useState("");
   var [showAddTag, SetShowAddTag] = useState(false);
   const [tasks, setTasks] = useState([]);
